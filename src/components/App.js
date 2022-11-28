@@ -49,6 +49,9 @@ ada.counselor === search || search === "Todos")
       <td>{ada.name}</td> 
       <td>{ada.counselor}</td> 
       <td>{ada.speciality}</td> 
+      <td><span>{ada.social_networks.name}</span> </td>
+      {/* <a href={ada.social_networks.url}>{ada.social_networks}</a><a href={ada.social_networks.url}>{ada.social_networks}</a></td>  */}
+      
     </tr> 
   );
 });
@@ -102,7 +105,7 @@ ada.counselor === search || search === "Todos")
             id="name"
             placeholder="Nombre"
             onInput={handleNew}
-            // value={newPhrase.quote}
+            value={newAda.name}
           />
           <input
             className="new-contact__input"
@@ -111,7 +114,7 @@ ada.counselor === search || search === "Todos")
             id="counselor"
             placeholder="Tutora"
             onInput={handleNew}
-            // value={newPhrase.quote}
+            value={newAda.counselor}
           />
           <input
             className="new-contact__input"
@@ -120,7 +123,7 @@ ada.counselor === search || search === "Todos")
             id="speciality"
             placeholder="Especialidad"
             onInput={handleNew}
-            // value={newPhrase.character}
+            value={newAda.speciality}
             // exactamente no entiendo el value
           />
           <input
