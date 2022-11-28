@@ -13,6 +13,7 @@ useEffect (() => {
   });
 }, []);
 
+
 const [newAda, setNewAda] = useState({
   "name": "",
 "counselor": "",
@@ -38,21 +39,34 @@ const handleClick = (ev) => {
 const handleSearch = (ev) => {
   setSearchs(ev.target.value)
 };
-
+// const social = data.social_networks.map((ada)=> {
+//   return (
+//     console.log(data);
+//     console.log(data.social_networks);
+//     // <a href={ada.url}>{ada.name}</a>
+//   )
+// });
 const htmlData = data
 .filter((ada) => 
 ada.counselor === search || search === "Todos")
-
+// .social_networks.map((ada)=> {
+//     return (
+//       <a href={ada.url}>{ada.name}</a>
+//     )
+//   });
 .map((ada) => {
   return (
 <tr key={ada.id}> 
       <td>{ada.name}</td> 
       <td>{ada.counselor}</td> 
       <td>{ada.speciality}</td> 
-      <td><span>{ada.social_networks.name}</span> </td>
-      {/* <a href={ada.social_networks.url}>{ada.social_networks}</a><a href={ada.social_networks.url}>{ada.social_networks}</a></td>  */}
+      <td>{ada.social_networks.map((ada)=> {
+    return (
+      <spam className="social"> - <a href={ada.url}>{ada.name}</a> - </spam>
+    )}
+      )}</td>
       
-    </tr> 
+       </tr>
   );
 });
 
