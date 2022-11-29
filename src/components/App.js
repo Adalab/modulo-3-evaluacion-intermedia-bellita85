@@ -19,8 +19,13 @@ const [newAda, setNewAda] = useState({
 "counselor": "",
 "speciality":"",
 "id": "",
+"social_networks":[],
+
 });
 const [search, setSearchs] = useState('Todos');
+const [searchInput, setSearchsInput] = useState('');
+
+
 const handleNew = (ev) => {
   setNewAda({ ...newAda, [ev.target.id]: ev.target.value });
 };
@@ -33,36 +38,56 @@ const handleClick = (ev) => {
     "counselor": "",
     "speciality":"",
     "id" : crypto.randomUUID(),
+    "social_networks":[],
+
   });
 };
-
+const handleOnsubmit = (ev) => {
+  ev.preventDefault();
+}
 const handleSearch = (ev) => {
   setSearchs(ev.target.value)
 };
-// const social = data.social_networks.map((ada)=> {
+const handleSearchInput = (ev) => {
+ 
+  setSearchsInput(ev.target.value)
+};
+
+// const htmlData = data
+// .includes((ada) => 
+// ada.name === searchInput || searchInput === "");
+
+
+// htmlData.map((ada) => {
 //   return (
-//     console.log(data);
-//     console.log(data.social_networks);
-//     // <a href={ada.url}>{ada.name}</a>
-//   )
+// <tr key={ada.id}> 
+//       <td>{ada.name}</td> 
+//       <td>{ada.counselor}</td> 
+//       <td>{ada.speciality}</td> 
+//       <td>{ada.social_networks.map((ada, index)=> {
+//     return (
+//       <span key={index}className="social"> - <a href={ada.url}>{ada.name}</a> - </span>
+//     )}
+//       )}</td>
+      
+//        </tr>
+//   );
 // });
-const htmlData = data
+// HAZME IN FILTRADO Y EL QUE INCLUYA...
+const htmlData2 = data
 .filter((ada) => 
 ada.counselor === search || search === "Todos")
-// .social_networks.map((ada)=> {
-//     return (
-//       <a href={ada.url}>{ada.name}</a>
-//     )
-//   });
+.filter((ada) => 
+ada.name.toLowerCase().includes(searchInput.toLowerCase()))
 .map((ada) => {
   return (
 <tr key={ada.id}> 
       <td>{ada.name}</td> 
       <td>{ada.counselor}</td> 
       <td>{ada.speciality}</td> 
-      <td>{ada.social_networks.map((ada)=> {
+      <td>{ada.social_networks.map((ada, index)=> {
     return (
-      <spam className="social"> - <a href={ada.url}>{ada.name}</a> - </spam>
+      <span key={index}className="social"> - <a href={ada.url}>{ada.name}</a> - </span>
     )}
       )}</td>
       
@@ -74,15 +99,15 @@ ada.counselor === search || search === "Todos")
    <div> 
         <header className="header">
         <h1 className="header__title">Adalabers</h1>
-        <form>
+        <form onSubmit={handleOnsubmit}>
           <input
             className="header__search"
             autoComplete="off"
             type="text"
             name="name"
             placeholder="Ej. MariCarmen"
-            // onChange={handleSearch}
-            // value={search}
+            onChange={handleSearchInput}
+            value={searchInput}
           />
           
          <select className='select'
@@ -91,7 +116,7 @@ ada.counselor === search || search === "Todos")
           <option value="Todos">Todos</option>
           <option value="Yanelis">Yanelis</option>
           <option value="Dayana">Dayana</option>
-          <option value="Ivan">Ivan</option>
+          <option value="Iván">Iván</option>
          </select>
       
         </form>
@@ -105,7 +130,9 @@ ada.counselor === search || search === "Todos")
   </tr></thead> 
  
 
-  <tbody>{htmlData}</tbody>
+  <tbody>
+      {htmlData2}
+    </tbody>
 
 
 </table>
